@@ -1,0 +1,180 @@
+create table categoria
+(
+  id_categoria int auto_increment
+    primary key,
+  nombre       varchar(255) null
+)
+  comment 'Categorias de los productos';
+
+create table cliente
+(
+  id_cliente        int auto_increment
+    primary key,
+  nombre            varchar(45) null,
+  rtn               varchar(45) null,
+  descuento_credito double      null,
+  limite_credito    double      null,
+  forma_pago        int         null,
+  estado            int         null,
+  direccion         varchar(45) null,
+  telefono          varchar(30) null,
+  web               varchar(45) null,
+  correo            varchar(45) null
+)
+  comment 'registros de los clientes';
+
+create table impuesto
+(
+  id                 int auto_increment
+    primary key,
+  descripcion        varchar(45)                             not null,
+  porcentaje         double                                  not null,
+  fecha_creacion     timestamp default CURRENT_TIMESTAMP     not null
+  on update CURRENT_TIMESTAMP,
+  fecha_modificacion timestamp default '0000-00-00 00:00:00' not null,
+  estado             tinyint                                 not null
+);
+
+create table marca
+(
+  id_marca int auto_increment
+    primary key,
+  nombre   varchar(45) null
+)
+  comment 'marca de los productos';
+
+create table mercaderia
+(
+  id_mercaderia int auto_increment
+    primary key,
+  descripcion   varchar(120) null
+);
+
+create table proveedor
+(
+  id_proveedor      int auto_increment
+    primary key,
+  nombre_proveedor  varchar(80)  null,
+  nombre_comercial  varchar(80)  null,
+  column_4          int          null,
+  rtn               varchar(50)  not null,
+  telefono          varchar(80)  null,
+  fax               varchar(45)  null,
+  correo            varchar(45)  null,
+  web               varchar(50)  null,
+  descuento_credito double       null,
+  limite_credito    double       null,
+  direccion         varchar(120) null,
+  contacto          varchar(120) null,
+  estado            binary(1)    null
+)
+  comment 'Tabla de los proveedores de productos';
+
+create table transaccion_detalle
+(
+  numero          varchar(45)                         not null
+    primary key,
+  fecha_detalle   timestamp default CURRENT_TIMESTAMP not null,
+  posicion        int                                 null,
+  codigo_producto int                                 null,
+  descripcion     varchar(45)                         null,
+  calidad         varchar(45)                         null,
+  valor           double                              null,
+  unidades        int                                 null,
+  isv             double                              null,
+  total_linea     double                              null
+)
+  comment 'detalle de la transaccion';
+
+create table transacciones
+(
+  numero_transaccion int auto_increment
+    primary key,
+  fecha              timestamp default CURRENT_TIMESTAMP not null,
+  tipo_transaccion   varchar(45)                         null,
+  codigo_tercero     varchar(45)                         null,
+  nombre_tercero     varchar(45)                         null,
+  tipo_tercero       varchar(45)                         null,
+  referencia         varchar(100)                        null,
+  id_usuario         int                                 null,
+  usuario            varchar(45)                         null,
+  id_vendedor        int                                 null,
+  subtotal           double                              null,
+  isv                double                              null,
+  total              double                              null,
+  estado             int                                 null,
+  forma_pago         varchar(50)                         null,
+  rtn                varchar(50)                         null
+);
+
+create table unidades
+(
+  id_unidades int auto_increment
+    primary key,
+  nombre      varchar(45) not null,
+  descripcion varchar(45) not null
+)
+  comment 'Medicion de los productos como litros';
+
+create table producto
+(
+  codigo_pk       varchar(45)  not null
+    primary key,
+  codigo_barra    varchar(45)  null,
+  descripcion     varchar(255) null,
+  sku_proveedor   varchar(45)  null,
+  costo_fijo      double       null,
+  costo_variable  double       null,
+  utilidad        double       null,
+  precio          double       null,
+  unidades_fk     int          null,
+  estado          binary(1)    null,
+  categoria_fk    int          null,
+  marca_fk        int          null,
+  impuesto_fk     int          null,
+  mercaderia      int          null,
+  id_proveedor_fk int          not null,
+  constraint producto_id_proveedor_fk_uindex
+  unique (id_proveedor_fk),
+  constraint producto_unidades_id_unidades_fk
+  foreign key (unidades_fk) references unidades (id_unidades),
+  constraint producto_categoria_id_categoria_fk
+  foreign key (categoria_fk) references categoria (id_categoria),
+  constraint producto_marca_id_marca_fk
+  foreign key (marca_fk) references marca (id_marca),
+  constraint producto_impuesto_id_fk
+  foreign key (impuesto_fk) references impuesto (id),
+  constraint producto_ibfk_1
+  foreign key (id_proveedor_fk) references proveedor (id_proveedor)
+);
+
+create index producto_categoria_id_categoria_fk
+  on producto (categoria_fk);
+
+create index producto_impuesto_id_fk
+  on producto (impuesto_fk);
+
+create index producto_marca_id_marca_fk
+  on producto (marca_fk);
+
+create index producto_unidades_id_unidades_fk
+  on producto (unidades_fk);
+
+create table usuario
+(
+  id_usuario int auto_increment
+    primary key,
+  nombre     varchar(45) not null,
+  password   varchar(45) not null,
+  estado     int         not null
+)
+  comment 'registro de usuarios del sistema';
+
+create table vendedor
+(
+  id_vendedor int auto_increment
+    primary key,
+  nombre      varchar(60) null
+)
+  comment 'registro de vendedores';
+
