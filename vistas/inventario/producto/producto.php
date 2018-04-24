@@ -38,15 +38,15 @@
                 <th>Costo Variable</th>
                 <th>Utilidad</th>
                 <th>Precio</th>
-                <th>Estado</th>
                 <th>Unidades</th>
+                <th>Estado</th>
                 <th>Opciones</th>
               </thead>
               <tbody>
                 <?php
                 
                 include($_SERVER['DOCUMENT_ROOT'].'/sistema/modelo/conexion.php');
-                $db=conexion('root','K17OACX');
+                $db=conexion('root','');
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $db->prepare("SELECT *  FROM producto");
                 $stmt->execute();
@@ -66,8 +66,8 @@
                   echo "<td>".$fila[10]."</td>";
                   echo "<td>".$fila[11]."</td>";
                   echo "<td>".$fila[12]."</td>";
-                  echo "<td>".$fila[13]."</td>";
-                  echo "<td>".($fila[14]==0?'Deshabilitado':'Habilitado')."</td>";
+                  echo "<td>".$fila[14]."</td>";
+                  echo "<td>".($fila[13]==0?'Deshabilitado':'Habilitado')."</td>";
                   echo '<td>
                   <a class="btn btn-primary ajax-request" href="/inventario/producto/productoeditar.php?id='.$fila[0].'">
                   <i class="fa fa-pencil"></i>
