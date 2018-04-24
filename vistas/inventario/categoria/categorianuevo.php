@@ -42,7 +42,7 @@ $(form_nuevo).submit(function( event ) {
   event.preventDefault();
   $.ajax({
     type:"POST",
-    url:  './controlador/categoriacrear.php',
+    url:  './controlador/categoria/categoriacrear.php',
     data:$("#form_nuevo").serialize(),
     dataType: 'html',
     success: function(data){

@@ -60,7 +60,7 @@ $(form_eliminar).submit(function( event ) {
   event.preventDefault();
   $.ajax({
     type:"POST",
-    url:  './controlador/categoriaeliminar.php',
+    url:  './controlador/impuesto/categoriaeliminar.php',
     data:$("#form_eliminar").serialize(),
     dataType: 'html',
     success: function(data){

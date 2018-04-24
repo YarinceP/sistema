@@ -70,31 +70,15 @@ create table proveedor
 )
   comment 'Tabla de los proveedores de productos';
 
-create table transaccion_detalle
-(
-  numero          varchar(45)                         not null
-    primary key,
-  fecha_detalle   timestamp default CURRENT_TIMESTAMP not null,
-  posicion        int                                 null,
-  codigo_producto int                                 null,
-  descripcion     varchar(45)                         null,
-  calidad         varchar(45)                         null,
-  valor           double                              null,
-  unidades        int                                 null,
-  isv             double                              null,
-  total_linea     double                              null
-)
-  comment 'detalle de la transaccion';
-
 create table transacciones
 (
-  numero_transaccion int auto_increment
+  numero_transaccion varchar(45)                         not null
     primary key,
   fecha              timestamp default CURRENT_TIMESTAMP not null,
   tipo_transaccion   varchar(45)                         null,
-  codigo_tercero     varchar(45)                         null,
+  codigo_tercero     int                                 null,
   nombre_tercero     varchar(45)                         null,
-  tipo_tercero       varchar(45)                         null,
+  tipo_tercero       int                                 null,
   referencia         varchar(100)                        null,
   id_usuario         int                                 null,
   usuario            varchar(45)                         null,
@@ -106,6 +90,24 @@ create table transacciones
   forma_pago         varchar(50)                         null,
   rtn                varchar(50)                         null
 );
+
+create table transaccion_detalle
+(
+  numero_trasaccion varchar(45)                         not null
+    primary key,
+  fecha_detalle     timestamp default CURRENT_TIMESTAMP not null,
+  posicion          int                                 null,
+  codigo_producto   int                                 null,
+  descripcion       varchar(45)                         null,
+  cantidad          double                              null,
+  cantidad_movida   double                              null,
+  unidades          int                                 null,
+  isv               double                              null,
+  total_linea       double                              null,
+  constraint transaccion_detalle_transacciones_numero_transaccion_fk
+  foreign key (numero_trasaccion) references transacciones (numero_transaccion)
+)
+  comment 'detalle de la transaccion';
 
 create table unidades
 (

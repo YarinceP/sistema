@@ -74,7 +74,7 @@ $(form_eliminar).submit(function( event ) {
   event.preventDefault();
   $.ajax({
     type:"POST",
-    url:  './controlador/impuestoeliminar.php',
+    url:  './controlador/impuesto/impuestoeliminar.php',
     data:$("#form_eliminar").serialize(),
     dataType: 'html',
     success: function(data){
