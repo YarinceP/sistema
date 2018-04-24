@@ -173,20 +173,13 @@ include '../../../controlador/producto/querys.php';
     </div>
   </div>
 </div>
-<?php $id=$_POST['categoria_fk']?>
-<input type="text" id="idNew" value="<?php echo str_pad($id,4,"0",STR_PAD_LEFT); ?>"  >
+
 <script>
 $(form_nuevo).ready(function(){
     $('input[type="submit"]').removeAttr('disabled');
     
 });
-//Mostrar codigo de la familia
-     $("#categoria_fk").on("change", function(){
-       // $("#codigo_pk").val("");//Limpiamos
-      
-      
-       $("#codigo_pk").val($("#idNew").val()); //aqui le asignamos un valor el cual usted define
-    });
+
 $(form_nuevo).submit(function( event ) {
   event.preventDefault();
   $.ajax({
@@ -222,5 +215,13 @@ $(form_nuevo).submit(function( event ) {
      console.log(data);
     }
   });
+});
+
+$('#categoria_fk').on('change',function () {
+    var categoria=$("#categoria_fk option:selected").val();
+    var url = './controlador/producto/correlativo.php?categoria='+categoria;
+    $.get(url,function (data) {
+        $('#codigo_pk').val(data);
+    });
 });
 </script>
