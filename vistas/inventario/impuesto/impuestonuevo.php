@@ -46,7 +46,7 @@ $(form_nuevo).submit(function( event ) {
   event.preventDefault();
   $.ajax({
     type:"POST",
-    url:  './controlador/impuestocrear.php',
+    url:  './controlador/impuesto/impuestocrear.php',
     data:$("#form_nuevo").serialize(),
     dataType: 'html',
     success: function(data){

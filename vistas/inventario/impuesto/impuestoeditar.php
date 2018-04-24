@@ -74,7 +74,7 @@ $(form_editar).submit(function( event ) {
   event.preventDefault();
   $.ajax({
     type:"POST",
-    url:  './controlador/impuestoactualizar.php',
+    url:  './controlador/impuesto/impuestoactualizar.php',
     data:$("#form_editar").serialize(),
     dataType: 'html',
     success: function(data){
