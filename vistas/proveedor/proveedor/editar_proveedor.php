@@ -99,12 +99,12 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Forma de Pago</label>
                                 <input type="text" name="contacto" id="contacto" required
-                                       class="form-control" value="<?php echo $fila['contacto'];?>" />
+                                       class="form-control" value="<?php echo $fila['contacto'];?>" disabled/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Estado</label>
-                                <input type="text" name="contacto" id="contacto" required
+                                <input type="text" name="estado" id="contacto" required
                                        class="form-control" value="<?php if($fila['estado']){
                                     echo "Habilitado";
                                 } else{
@@ -134,7 +134,7 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
         event.preventDefault();
         $.ajax({
             type: "POST",
-            url: './controlador/proveedor/crear_proveedor.php',
+            url: './controlador/proveedor/editar_proveedor.php',
             data: $("#formulario_editar_proveedor").serialize(),
             dataType: 'html',
             success: function (data) {
