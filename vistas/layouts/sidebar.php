@@ -2,11 +2,9 @@
 <aside class="main-sidebar">
   <section class="sidebar">
     <div class="user-panel">
-      <div class="pull-left image">
-        <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
-      </div>
+
       <div class="pull-left info">
-        <p>Pedro Picapiedra</p>
+        <p>ANAKIN SKYWALKER</p>
 
       </div>
     </div>
@@ -31,7 +29,6 @@
       <li class="treeview">
           <a href="#"><i class='fa fa-book'></i> <span>Inventario</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="#">--------</a></li>
                 <li><a href="/inventario/categoria/categoria.php" class="ajax-request">Categoria</a></li>
                 <li><a href="/inventario/impuesto/impuesto.php" class="ajax-request">Impuestos</a></li>
                 <li><a href="/inventario/producto/producto.php" class="ajax-request">Producto</a></li>
@@ -44,7 +41,7 @@
       <li class="treeview">
           <a href="#"><i class='fa fa-group'></i> <span>Proveedores</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="#">Proveedores</a></li>
+                <li><a href="/proveedor/proveedor/proveedor.php" class="ajax-request">Proveedores</a></li>
             </ul>
       </li>
       <li class="treeview">
