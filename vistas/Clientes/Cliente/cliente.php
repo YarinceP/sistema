@@ -13,7 +13,7 @@
         </a>
       </h3>
     </div>
-  </div>
+  </div>    
 </div>
 
 <div class="container-fluid spark-screen">
