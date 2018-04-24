@@ -23,7 +23,7 @@
       <li class="treeview">
           <a href="#"><i class='fa fa-group'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="#">Clientes</a></li>
+                <li><a href="/Clientes/Cliente/cliente.php" class="ajax-request">Clientes</a></li>
                 <li><a href="#">Recibos</a></li>
                 <li><a href="#">Reportes</a></li>
             </ul>
@@ -31,7 +31,6 @@
       <li class="treeview">
           <a href="#"><i class='fa fa-book'></i> <span>Inventario</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="#">--------</a></li>
                 <li><a href="/inventario/categoria/categoria.php" class="ajax-request">Categoria</a></li>
                 <li><a href="/inventario/impuesto/impuesto.php" class="ajax-request">Impuestos</a></li>
                 <li><a href="/inventario/producto/producto.php" class="ajax-request">Producto</a></li>
