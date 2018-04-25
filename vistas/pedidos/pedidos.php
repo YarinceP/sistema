@@ -882,7 +882,8 @@
 
 
     <script>
-        var conteo = 1;
+        var conteo_terceros = 1;
+        var conteo_producto = 1;
     </script>
     <script>
         $(document).on('keypress', function (e) {
@@ -895,7 +896,7 @@
                     dataType: 'json',
                     data: {tipo_transaccion: tipo_transaccion},
                     success: function (data) {
-                        if (conteo == 1) {
+                        if (conteo_terceros == 1) {
                             $.each(data, function (name, value) {
                                 $("#listadodeterceros").append('<tr>' +
                                     '<td>' + data[name].id_tercero + '</td>' +
@@ -906,7 +907,7 @@
                         }
                         $('#listaclientes').DataTable();
                         $("#buscarcliente").modal('show');
-                        conteo++;
+                        conteo_terceros++;
                     }
                 });
             }
@@ -921,32 +922,30 @@
                   type: "POST",
                   url: './controlador/buscar_producto.php',
                    datatype: 'json',
-                   success: function (data) {
-                        console.log("hasta aqui funciona");
-                       $.each(data, function (name, value){
-                           $("#productos").append('<tr>' +
-                               '<td>' + data[name].codigo_pk + '</td>' +
-                               '<td>' + data[name].descripcion + '</td>' +
-                               '<td>' + data[name].precio + '</td>' +
-                               '<td>' + data[name].impuesto_fk + '</td>' +
-                               '<td>' + 'TOTAL' + '</td>' +
-                               '<td>' + '<a class="btn btn-primary">' + 'SELECCIONAR' + '</a>' + '</td>' +
-                               '</tr>');
-                       });
-                       $("#listaproductos").DataTable();
+                   success: function (data){
+                        var json = JSON.parse(data);
+
+                        if (conteo_producto == 1) {
+                            $.each(json, function (index, values) {
+                                $("#productos").append('<tr>' +
+                                    '<td>' + json[index].codigo_pk + '</td>' +
+                                    '<td>' + json[index].descripcion + '</td>' +
+                                    '<td>' + json[index].precio + '</td>' +
+                                    '<td>' + json[index].impuesto_fk + '</td>' +
+                                    '<td>' + json[index].impuesto_fk + '</td>' +
+                                    '<td>' + '<a class="btn btn-primary">' + 'SELECCIONAR' + '</a>' + '</td>' +
+                                    '</tr>');
+                            });
+                        }
+
+                       $('#listaproductos').DataTable();
                        $("#buscarproducto").modal('show');
+                       conteo_producto++;
+
                    }
                });
             }
         });
     </script>
 
-    <tr>
-        <th>Codigo</th>
-        <th>Descripcion</th>
-        <th>Precio</th>
-        <th>ISV</th>
-        <th>Total</th>
-        <th>Opciones</th>
-    </tr>
 </section>
