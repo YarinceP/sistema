@@ -4,7 +4,7 @@ $db = conexion('root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $db->prepare("SELECT *  FROM proveedor WHERE id_proveedor =" . $_GET['id']);
 $stmt->execute();
-$fila= $stmt->fetch(PDO::FETCH_ASSOC);
+$fila = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <div class="container-fluid">
@@ -27,96 +27,120 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Identidad</label>
                                 <input type="text" name="id_proveedor" id="id_proveedor" required maxlength="255"
-                                       class="form-control" value="<?php echo $fila['id_proveedor'];?>" readonly/>
+                                       class="form-control" value="<?php echo $fila['id_proveedor']; ?>" readonly/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Nombre</label>
                                 <input type="text" name="nombre_proveedor" id="nombre_proveedor" required
-                                       class="form-control" value="<?php echo $fila['nombre_proveedor'];?>" />
+                                       class="form-control" value="<?php echo $fila['nombre_proveedor']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Nombre Comercial</label>
                                 <input type="text" name="nombre_comercial" id="nombre_comercial" required
-                                       class="form-control" value="<?php echo $fila['nombre_comercial'];?>" />
+                                       class="form-control" value="<?php echo $fila['nombre_comercial']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">RTN</label>
                                 <input type="text" name="rtn" id="rtn" required
-                                       class="form-control" value="<?php echo $fila['rtn'];?>" />
+                                       class="form-control" value="<?php echo $fila['rtn']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Telefono</label>
                                 <input type="text" name="telefono" id="telefono" required
-                                       class="form-control" value="<?php echo $fila['telefono'];?>" />
+                                       class="form-control" value="<?php echo $fila['telefono']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Fax</label>
                                 <input type="text" name="fax" id="fax" required
-                                       class="form-control" value="<?php echo $fila['fax'];?>" />
+                                       class="form-control" value="<?php echo $fila['fax']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Correo</label>
                                 <input type="email" name="correo" id="correo" required class="form-control"
-                                       value="<?php echo $fila['correo'];?>" />
+                                       value="<?php echo $fila['correo']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Pagina Web</label>
                                 <input type="text" name="web" id="web" required class="form-control"
-                                       value="<?php echo $fila['web'];?>" />
+                                       value="<?php echo $fila['web']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Descuento de credito</label>
                                 <input type="number" name="descuento_credito" id="descuento_credito" required
-                                       class="form-control" value="<?php echo $fila['descuento_credito'];?>" />
+                                       class="form-control" value="<?php echo $fila['descuento_credito']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Limite de credito</label>
                                 <input type="number" name="limite_credito" id="limite_credito" required
-                                       class="form-control" value="<?php echo $fila['limite_credito'];?>" />
+                                       class="form-control" value="<?php echo $fila['limite_credito']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Direccion</label>
                                 <input type="text" name="direccion" id="direccion" required
-                                       class="form-control" value="<?php echo $fila['direccion'];?>" />
+                                       class="form-control" value="<?php echo $fila['direccion']; ?>"/>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Contacto</label>
                                 <input type="text" name="contacto" id="contacto" required
-                                       class="form-control" value="<?php echo $fila['contacto'];?>" />
+                                       class="form-control" value="<?php echo $fila['contacto']; ?>"/>
                             </div>
+
+                            <?php
+
+                            if ($fila['forma_pago'] == 1) {
+
+                                $seleccion = "CREDITO";
+                                $noSeleccion = "CONTADO";
+                                $idFormaPago = 2;
+
+                            } else {
+                                $seleccion = "CONTADO";
+                                $noSeleccion = "CREDITO";
+                                $idFormaPago = 1;
+                            }
+
+                            if ($fila['estado']==0){
+                                $seleccion2 = "HABILITADO";
+                                $noSeleccion2 = "DESABILITADO";
+                                $idEstado = 1;
+                            }else{
+                                $seleccion2 = "DESABILITADO";
+                                $noSeleccion2 = "HABILITADO";
+                                $idEstado = 0;
+                            }
+
+                            ?>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Forma de Pago</label>
                                 <select name="forma_pago" id="forma_pago" class="form-control">
-                                    <option selected>[SELECCIONE]</option>
-                                    <option value="1">CREDITO</option>
-                                    <option value="2">CONTADO</option>
+                                    <option selected value="<?php echo $fila['forma_pago'] ?>"><?php echo $seleccion ?></option>
+                                    <option value="<?php echo $idFormaPago ?>"><?php echo $noSeleccion?></option>
                                 </select>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Estado</label>
                                 <select name="estado" id="estado" class="form-control">
-                                    <option selected>[SELECCIONE]</option>
-                                    <option value="0">HABILITADO</option>
-                                    <option value="1">DESABILITADO</option>
+                                    <option selected value="<?php echo $fila['estado']?>"><?php echo $seleccion2?></option>
+                                    <option value="<?php echo $idEstado ?>"><?php echo $noSeleccion2?></option>
                                 </select>
                             </div>
 
                             <div class="col-sm-12">
                                 <br>
-                                <input type="submit" class="btn btn-primary pull-right" value="Guardar cambios" />
+                                <input type="submit" class="btn btn-primary pull-right" value="Guardar cambios"/>
                             </div>
                         </form>
                     </div>
@@ -143,7 +167,7 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
                 console.log(data);
                 if (data == "Ok") {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
                         text: " Registro editado correctamente ",
                         icon: "success",
                         html: true,
@@ -152,7 +176,8 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
                     $('input[type="submit"]').attr("", "true");
                 } else {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
+                        icon: "error",
                         text: " Error ",
                         html: true,
                         confirmButtonText: "Cerrar",

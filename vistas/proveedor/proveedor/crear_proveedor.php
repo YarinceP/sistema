@@ -94,10 +94,11 @@
                                        class="form-control"/>
                             </div>
 
-                                <div class="col-sm-12">
-                                    <br>
-                                    <input type="submit" class="btn btn-primary pull-right" value="Crear Proveedor" disabled/>
-                                </div>
+                            <div class="col-sm-12">
+                                <br>
+                                <input type="submit" class="btn btn-primary pull-right" value="Crear Proveedor"
+                                       disabled/>
+                            </div>
                         </form>
                     </div>
                     <div class="col-md-4">
@@ -123,7 +124,7 @@
                 console.log(data);
                 if (data == "Ok") {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
                         text: " Registro creado correctamente ",
                         icon: "success",
                         html: true,
@@ -132,7 +133,8 @@
                     $('input[type="submit"]').attr("disabled", "true");
                 } else {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
+                        icon: "error",
                         text: " Error ",
                         html: true,
                         confirmButtonText: "Cerrar",

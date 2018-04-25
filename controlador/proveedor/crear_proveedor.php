@@ -1,7 +1,7 @@
 <?php
 include('../../modelo/conexion.php');
 
-$estado = 1;
+$estado = 0;
 
 try {
     $db = conexion("root", "");

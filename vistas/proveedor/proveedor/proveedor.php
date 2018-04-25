@@ -56,7 +56,7 @@
                                 } else {
                                     echo "CONTADO";
                                 }
-                                echo "<td>" . $item['telefono'] . "</td>";
+                                echo "<td>" . $item['estado'] . "</td>";
                                 echo "</td>";
                                 echo "<td>" . $item['telefono'] . "</td>";
                                 echo '<td>
