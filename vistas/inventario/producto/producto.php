@@ -29,26 +29,28 @@
                 <th>Codigo Barra</th>
                 <th>Descripcion</th>
                 <th>SKU Proveedor</th>
-                <th>Familia</th>
-                <th>Marca</th>
-                <th>Impuesto</th>
-                <th>Unidades</th>
-                <th>Descuento</th>
                 <th>Costo Fijo</th>
                 <th>Costo Variable</th>
                 <th>Utilidad</th>
                 <th>Precio</th>
-                <th>Unidades</th>
+                <th>Unidad</th>
                 <th>Estado</th>
+                <th>Familia</th>
+                <th>Marca</th>
+                <th>Impuesto</th>
                 <th>Opciones</th>
               </thead>
               <tbody>
                 <?php
-                
+
                 include($_SERVER['DOCUMENT_ROOT'].'/sistema/modelo/conexion.php');
                 $db=conexion('root','');
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $db->prepare("SELECT *  FROM producto");
+                $stmt = $db->prepare("SELECT codigo_pk,codigo_barra,p.descripcion,sku_proveedor,costo_fijo,
+                                                costo_variable, utilidad, precio,u.nombre,p.estado,c.nombre,m.nombre,i.porcentaje
+                                                FROM producto as p,unidades as u,categoria as c,marca as m,impuesto as i
+                                                WHERE p.unidades_fk=u.id_unidades AND p.categoria_fk=c.id_categoria AND
+                                                p.impuesto_fk=i.id AND p.marca_fk=m.id_marca;");
                 $stmt->execute();
                 $fila = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_LAST);
                 do{/*TODO:Arrreglar la Manera de mostar los datos*/
@@ -62,12 +64,10 @@
                   echo "<td>".$fila[6]."</td>";
                   echo "<td>".$fila[7]."</td>";
                   echo "<td>".$fila[8]."</td>";
-                  echo "<td>".$fila[9]."</td>";
+                  echo "<td>".($fila[9]==0?'Deshabilitado':'Habilitado')."</td>";
                   echo "<td>".$fila[10]."</td>";
                   echo "<td>".$fila[11]."</td>";
                   echo "<td>".$fila[12]."</td>";
-                  echo "<td>".$fila[14]."</td>";
-                  echo "<td>".($fila[13]==0?'Deshabilitado':'Habilitado')."</td>";
                   echo '<td>
                   <a class="btn btn-primary ajax-request" href="/inventario/producto/productoeditar.php?id='.$fila[0].'">
                   <i class="fa fa-pencil"></i>

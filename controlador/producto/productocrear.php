@@ -50,20 +50,20 @@
         :marca_fk, 
         :impuesto_fk)");
         //***********Datos Parametrizados */
-  
-    $stmt->bindParam(":codigo_pk",$codigo_pk);
-    $stmt->bindParam(":codigo_barra",$codigo_barra); 
-    $stmt->bindParam(":descripcion",$descripcion); 
-    $stmt->bindParam(":sku_proveedor",$sku_proveedor); 
-    $stmt->bindParam(":costo_fijo",$costo_fijo); 
-    $stmt->bindParam(":costo_variable",$costo_variable); 
-    $stmt->bindParam(":utilidad",$utilidad); 
-    $stmt->bindParam(":precio",$preico); 
-    $stmt->bindParam(":unidades_fk",$unidades_fk); 
-    $stmt->bindParam(":estado",$estado); 
-    $stmt->bindParam(":categoria_fk",$categoria_fk); 
-    $stmt->bindParam(":marca_fk",$marca_fk); 
-    $stmt->bindParam(":impuesto_fk",$impuesto_fk);
+
+      $stmt->bindParam(":codigo_pk", $codigo_pk);
+      $stmt->bindParam(":codigo_barra", $codigo_barra);
+      $stmt->bindParam(":descripcion", $descripcion);
+      $stmt->bindParam(":sku_proveedor", $sku_proveedor);
+      $stmt->bindParam(":costo_fijo", $costo_fijo);
+      $stmt->bindParam(":costo_variable", $costo_variable);
+      $stmt->bindParam(":utilidad", $utilidad);
+      $stmt->bindParam(":precio", $preico);
+      $stmt->bindParam(":unidades_fk", $unidades_fk);
+      $stmt->bindParam(":estado", $estado);
+      $stmt->bindParam(":categoria_fk", $categoria_fk);
+      $stmt->bindParam(":marca_fk", $marca_fk);
+      $stmt->bindParam(":impuesto_fk", $impuesto_fk);
 
     $stmt->execute();
 
