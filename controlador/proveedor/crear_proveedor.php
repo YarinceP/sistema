@@ -4,7 +4,7 @@ include('../../modelo/conexion.php');
 $estado = 1;
 
 try {
-    $db = conexion("root", "K17OACX");
+    $db = conexion("root", "");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $db->prepare("INSERT INTO   

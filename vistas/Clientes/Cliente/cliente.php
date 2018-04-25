@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-md-12">
       <h3 class="page-header">
-        <a class="btn btn-primary ajax-request" href="/inventario/producto/productonuevo.php">
+        <a class="btn btn-primary ajax-request" href="/clientes/cliente/clienteNuevo.php">
           <i class="fa fa-plus"></i> Nuevo Cliente
         </a>
       </h3>
@@ -25,7 +25,7 @@
           <div class="col-md-12 ">
             <table class="table table-striped table-condensed" id="datos">
               <thead>
-                <th>Id_Cliente</th>
+                <th>Identidad</th>
                 <th>Nombre</th>
                 <th>RTN</th>
                 <th>Descuento de Credito</th>
@@ -59,15 +59,14 @@
                   echo "<td>".$fila[8]."</td>";
                   echo "<td>".$fila[9]."</td>";
                   echo "<td>".$fila[10]."</td>";
-                  echo "<td>".($fila[14]==0?'Deshabilitado':'Habilitado')."</td>";
                   echo '<td>
-                  <a class="btn btn-primary ajax-request" href="/inventario/producto/productoeditar.php?id='.$fila[0].'">
+                  <a class="btn btn-primary ajax-request" href="/clientes/cliente/clienteEditar.php?id='.$fila[0].'">
                   <i class="fa fa-pencil"></i>
                   </a>
-                  <a class="btn btn-success ajax-request" href="/inventario/producto/productoconsultar.php?id='.$fila[0].'">
+                  <a class="btn btn-success ajax-request" href="/clientes/cliente/clienteConsultar.php?id='.$fila[0].'">
                   <i class="fa fa-search"></i>
                   </a>
-                  <a class="btn btn-danger ajax-request" href="/inventario/producto/productoeliminar.php?id='.$fila[0].'">
+                  <a class="btn btn-danger ajax-request" href="/clientes/cliente/clienteEliminar.php?id='.$fila[0].'">
                   <i class="fa fa-trash"></i>
                   </a>
                   </td>';

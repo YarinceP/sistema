@@ -46,7 +46,7 @@
                 <?php
                 
                 include($_SERVER['DOCUMENT_ROOT'].'/sistema/modelo/conexion.php');
-                $db=conexion('root','K17OACX');
+                $db=conexion('root','');
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $db->prepare("SELECT *  FROM producto");
                 $stmt->execute();
