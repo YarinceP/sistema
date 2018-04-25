@@ -40,6 +40,15 @@
                             </div>
 
                             <div class="col-sm-6">
+                                <label class='control-sidebar-subheading' for="fecha">Forma de pago</label>
+                                <select name="forma_pago" id="forma_pago" class="form-control">
+                                    <option selected>[SELECCIONE]</option>
+                                    <option value="1">CREDITO</option>
+                                    <option value="2">CONTANDO</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Telefono</label>
                                 <input type="text" name="telefono" id="telefono" required
                                        class="form-control"/>

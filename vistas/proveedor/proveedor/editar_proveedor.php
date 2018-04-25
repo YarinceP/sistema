@@ -98,23 +98,25 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Forma de Pago</label>
-                                <input type="text" name="contacto" id="contacto" required
-                                       class="form-control" value="<?php echo $fila['contacto'];?>" disabled/>
+                                <select name="forma_pago" id="forma_pago" class="form-control">
+                                    <option selected>[SELECCIONE]</option>
+                                    <option value="1">CREDITO</option>
+                                    <option value="2">CONTADO</option>
+                                </select>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class='control-sidebar-subheading' for="fecha">Estado</label>
-                                <input type="text" name="estado" id="contacto" required
-                                       class="form-control" value="<?php if($fila['estado']){
-                                    echo "Habilitado";
-                                } else{
-                                    echo "Dehabiitado";
-                                }?>" />
+                                <select name="estado" id="estado" class="form-control">
+                                    <option selected>[SELECCIONE]</option>
+                                    <option value="0">HABILITADO</option>
+                                    <option value="1">DESABILITADO</option>
+                                </select>
                             </div>
 
                             <div class="col-sm-12">
                                 <br>
-                                <input type="submit" class="btn btn-primary pull-right" value="Crear Proveedor" />
+                                <input type="submit" class="btn btn-primary pull-right" value="Guardar cambios" />
                             </div>
                         </form>
                     </div>
@@ -142,7 +144,7 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
                 if (data == "Ok") {
                     swal({
                         title: "<small>¡Informacion!</small>",
-                        text: " Registro creado correctamente ",
+                        text: " Registro editado correctamente ",
                         icon: "success",
                         html: true,
                         confirmButtonText: "Cerrar"

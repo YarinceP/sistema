@@ -42,21 +42,21 @@
                             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                             $stmt = $db->prepare("SELECT *  FROM proveedor");
                             $stmt->execute();
-                            $fila= $stmt->fetchAll();
+                            $fila = $stmt->fetchAll();
                             foreach ($fila as $item) {
                                 echo "<tr>";
                                 echo "<td>" . $item['id_proveedor'] . "</td>";
                                 echo "<td>" . $item['nombre_proveedor'] . "</td>";
                                 echo "<td>" . $item['rtn'] . "</td>";
-                                echo "<td>" . $item['descuento_credito'] . "</td>";
-                                echo "<td>" . $item['limite_credito'] . "</td>";
-                                echo "<td>" . $item['telefono'] . "</td>";
+                                echo "<td>" . $item['descuento_credito'] . "%" . "</td>";
+                                echo "<td>" . $item['limite_credito'] . "%" . "</td>";
                                 echo "<td>";
-                                if($item['estado'] == 1) {
-                                    echo "Habilitado";
+                                if ($item['estado'] == 1) {
+                                    echo "CREDITO";
                                 } else {
-                                    echo "Deshabilitado";
+                                    echo "CONTADO";
                                 }
+                                echo "<td>" . $item['telefono'] . "</td>";
                                 echo "</td>";
                                 echo "<td>" . $item['telefono'] . "</td>";
                                 echo '<td>

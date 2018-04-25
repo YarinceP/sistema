@@ -10,6 +10,4 @@
   <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <link href="./dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
   <link href="./dist/css/skins/skin-blue.css" rel="stylesheet" type="text/css" />
-  <link href="./plugins/sweetalert-master/dist/sweetalert.css" rel="stylesheet" type="text/css" />
-
 </head>
