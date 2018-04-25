@@ -123,8 +123,8 @@ include '../../../controlador/producto/querys.php';
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label class='control-sidebar-subheading' for="fecha">Porcentaje</label>
-                                    <input type="number" name="porcentaje" id="precio" required step="any"
+                                    <label class='control-sidebar-subheading' for="fecha">Precio</label>
+                                    <input type="number" name="precio" id="precio" required step="any"
                                            class="form-control"/>
                                 </div>
 
@@ -157,10 +157,6 @@ include '../../../controlador/producto/querys.php';
                                            class="form-control"/>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <label class='control-sidebar-subheading' for="fecha">Precio</label>
-                                    <input type="number" name="precio" id="" required step="any" class="form-control"/>
-                                </div>
 
                             </div>
 
@@ -197,8 +193,9 @@ include '../../../controlador/producto/querys.php';
                 //var obj = jQuery.parseJSON( data);
                 if (data == "Ok") {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
                         text: " Registro creado correctamente ",
+                        icon: "success",
                         html: true,
                         confirmButtonText: "Cerrar",
                     });

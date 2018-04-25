@@ -58,7 +58,7 @@
       $stmt->bindParam(":costo_fijo", $costo_fijo);
       $stmt->bindParam(":costo_variable", $costo_variable);
       $stmt->bindParam(":utilidad", $utilidad);
-      $stmt->bindParam(":precio", $preico);
+      $stmt->bindParam(":precio", $precio);
       $stmt->bindParam(":unidades_fk", $unidades_fk);
       $stmt->bindParam(":estado", $estado);
       $stmt->bindParam(":categoria_fk", $categoria_fk);

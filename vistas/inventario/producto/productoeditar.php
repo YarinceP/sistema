@@ -4,7 +4,6 @@ $id = $_GET['id'];
 include($_SERVER['DOCUMENT_ROOT'] . '/sistema/modelo/conexion.php');
 
 
-
 $db = conexion('root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $db->prepare("select * from producto  where codigo_pk=" . $id);
@@ -18,11 +17,11 @@ do {
     $costo_variable = $fila[5];
     $utilidad = $fila[6];
     $precio = $fila[7];
-    $nombreUnidad = $fila[8];
+    $idProductoUnidades = $fila[8];
     $estadoProducto = $fila[9];
-    $nombreCategoria = $fila[10];
-    $nombreMarca = $fila[11];
-    $porcentajeImpuesto = $fila[12];
+    $idProductoCategoria = $fila[10];
+    $idMarcaProducto = $fila[11];
+    $idProductoImpuesto = $fila[12];
 
 
 } while ($fila = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_PRIOR))
@@ -31,14 +30,14 @@ do {
     <ol class="breadcrumb">
         <li><a href="./">Inicio</a></li>
         <li><a class="ajax-request" href="/inventario/producto/producto.php">Producto</a></li>
-        <li><a class="active" href="#">Producto Nuevo</a></li>
+        <li><a class="active" href="#">Editar Porducto</a></li>
     </ol>
 </div>
 <div class="container-fluid spark-screen">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Producto Nuevo</div>
+                <div class="panel-heading">Editar Producto</div>
                 <div class="panel-body">
                     <div class="col-md-4">
                     </div>
@@ -55,7 +54,7 @@ do {
 
                                 <div class="col-sm-6">
                                     <label class='control-sidebar-subheading' for="fecha">Codigo Barra</label>
-                                    <input type="text" name="codigo_barra" id="" class="form-control" required/>
+                                    <input type="text" name="codigo_barra" id="" class="form-control"/>
                                 </div>
 
                             </div>
@@ -79,14 +78,101 @@ do {
                                            required/>
                                 </div>
 
+                                <!--                Asignar variables de arreglo                -->
+                                <?php
+
+                                function categorialista()
+                                {
+                                    try {
+                                        $db = conexion("root", "");
+                                        $query = ("Select * from categoria");
+                                        $stmt = $db->prepare($query);
+                                        $stmt->execute();
+
+                                        $arreglo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        return $arreglo;
+
+
+                                    } catch (PDOException $e) {
+                                        echo "Error: " . $e;
+                                    }
+                                }
+
+                                function marcalista()
+                                {
+                                    try {
+                                        $db = conexion("root", "");
+                                        $query = ("Select * from marca");
+                                        $stmt = $db->prepare($query);
+                                        $stmt->execute();
+
+                                        $arreglo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        return $arreglo;
+
+                                    } catch (PDOException $e) {
+                                        echo "Error: " . $e;
+                                    }
+                                }
+
+                                function impuestolista()
+                                {
+                                    try {
+                                        $db = conexion("root", "");
+                                        $query = ("Select * from impuesto");
+                                        $stmt = $db->prepare($query);
+                                        $stmt->execute();
+
+                                        $arreglo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        return $arreglo;
+
+                                    } catch (PDOException $e) {
+                                        echo "Error: " . $e;
+                                    }
+                                }
+
+                                function unidadeslista()
+                                {
+                                    try {
+                                        $db = conexion("root", "");
+                                        $query = ("Select * from unidades");
+                                        $stmt = $db->prepare($query);
+                                        $stmt->execute();
+
+                                        $arreglo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        return $arreglo;
+
+                                    } catch (PDOException $e) {
+                                        echo "Error: " . $e;
+                                    }
+                                }
+
+
+                                $categoria = categorialista();
+                                $marca = marcalista();
+                                $impuesto = impuestolista();
+                                $unidades = unidadeslista();
+
+                                ?>
+
                                 <div class="col-sm-6">
                                     <label class='control-sidebar-subheading' for="fecha">Familias</label>
                                     <select class="form-control" id="categoria_fk" name="categoria_fk">
-                                        <option selected="selected">Ninguna</option>
+                                        <option selected="selected" value="<?php echo $idProductoCategoria ?>"><?php
+                                            foreach ($categoria as $categoria2) {
+                                                if ($categoria2['id_categoria'] == $idProductoCategoria) {
+                                                    echo $categoria2['nombre'];
+                                                }
+                                            }
+                                            ?></option>
                                         <?php
-                                        foreach ($categoria as $categoria) { ?>
-                                            <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre'] ?></option>
-                                            <?php
+                                        foreach ($categoria as $categoria) {
+
+                                            if ($categoria['id_categoria'] != $idProductoCategoria) {
+
+                                                ?>
+                                                <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre'] ?></option>
+                                                <?php
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -98,15 +184,50 @@ do {
 
                                 <div class="col-sm-6">
                                     <label class='control-sidebar-subheading' for="fecha">Marca</label>
-                                    <input type="text" name="marca_fk" id="marca_fk" value="<?php echo $nombreMarca ?>"
-                                           maxlength="255" class="form-control" required/>
+                                    <select class="form-control" id="marca_fk" name="marca_fk">
+                                        <option selected="selected" value="<?php echo $idMarcaProducto ?>"><?php
+                                            foreach ($marca as $marca2) {
+                                                if ($marca2['id_marca'] == $idMarcaProducto) {
+                                                    echo $marca2['nombre'];
+                                                }
+                                            }
+                                            ?></option>
+                                        <?php
+                                        foreach ($marca as $marca) {
+
+                                            if ($marca['id_marca'] != $idMarcaProducto) {
+
+                                                ?>
+                                                <option value="<?php echo $marca['id_marca'] ?>"><?php echo $marca['nombre'] ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label class='control-sidebar-subheading' for="fecha">Impuesto</label>
-                                    <input type="text" name="impuesto_fk" id="impuesto_fk"
-                                           value="<?php echo $porcentajeImpuesto ?>" maxlength="255"
-                                           class="form-control" required/>
+                                    <label class='control-sidebar-subheading' for="fecha">Familias</label>
+                                    <select class="form-control" id="impuesto_fk" name="impuesto_fk">
+                                        <option selected="selected" value="<?php echo $idProductoImpuesto ?>"><?php
+                                            foreach ($impuesto as $impuesto2) {
+                                                if ($impuesto2['id'] == $idProductoImpuesto) {
+                                                    echo $impuesto2['descripcion'];
+                                                }
+                                            }
+                                            ?></option>
+                                        <?php
+                                        foreach ($impuesto as $impuesto) {
+
+                                            if ($impuesto['id'] != $idProductoImpuesto) {
+
+                                                ?>
+                                                <option value="<?php echo $impuesto['id'] ?>"><?php echo $impuesto['descripcion'] ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
 
                             </div>
@@ -114,15 +235,33 @@ do {
                             <div class="row">
 
                                 <div class="col-sm-6">
-                                    <label class='control-sidebar-subheading' for="fecha">Unidades</label>
-                                    <input type="text" name="unidades_fk" id="unidades_fk"
-                                           value="<?php echo $nombreUnidad ?>" maxlength="255" class="form-control"
-                                           required/>
+                                    <label class='control-sidebar-subheading' for="fecha">Familias</label>
+                                    <select class="form-control" id="unidades_fk" name="unidades_fk">
+                                        <option selected="selected" value="<?php echo $idProductoUnidades ?>"><?php
+                                            foreach ($unidades as $unidades2) {
+                                                if ($unidades2['id_unidades'] == $idProductoUnidades) {
+                                                    echo $unidades2['nombre'];
+                                                }
+                                            }
+                                            ?></option>
+                                        <?php
+                                        foreach ($unidades as $unidades) {
+
+                                            if ($unidades['id_unidades'] != $idProductoUnidades) {
+
+                                                ?>
+                                                <option value="<?php echo $unidades['id_unidades'] ?>"><?php echo $unidades['nombre'] ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label class='control-sidebar-subheading' for="fecha">Porcentaje</label>
-                                    <input type="number" name="porcentaje" id="precio" step="any" class="form-control"
+                                    <label class='control-sidebar-subheading' for="fecha">Precio</label>
+                                    <input type="number" name="precio" id="precio" value="<?php echo $precio ?>"
+                                           step="any" class="form-control"
                                            required/>
                                 </div>
 
@@ -156,16 +295,10 @@ do {
                                            step="any" class="form-control" required/>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <label class='control-sidebar-subheading' for="fecha">Precio</label>
-                                    <input type="number" name="precio" id="" value="<?php echo $precio ?>" step="any"
-                                           class="form-control" required/>
-                                </div>
-
                             </div>
                             <div class="col-sm-12">
                                 <br>
-                                <input type="submit" class="btn btn-danger" value="Enviar" disabled/>
+                                <input type="submit" class="btn btn-success" value="Enviar" disabled/>
                             </div>
                         </form>
                     </div>
@@ -186,22 +319,24 @@ do {
         event.preventDefault();
         $.ajax({
             type: "POST",
-            url: './controlador/producto/productoeditar.php',
+            url: './controlador/producto/productoactualizar.php',
             data: $("#form_eliminar").serialize(),
             dataType: 'html',
             success: function (data) {
                 //var obj = jQuery.parseJSON( data);
                 if (data == "Ok") {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
                         text: " Registro eliminado correctamente ",
+                        icon: "success",
                         html: true,
                         confirmButtonText: "Cerrar",
                     });
                     $('input[type="submit"]').attr("disabled", "true");
                 } else {
                     swal({
-                        title: "<small>¡Informacion!</small>",
+                        title: "Informacion",
+                        icon: "error",
                         text: " Error ",
                         html: true,
                         confirmButtonText: "Cerrar",
