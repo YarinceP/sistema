@@ -1,6 +1,6 @@
 <?php
 $usuario="root";
-$clave="";
+$clave="k17OACX";
 
 function conexion($usuario,$clave){
   try{

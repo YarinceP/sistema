@@ -4,12 +4,12 @@ include('../../modelo/conexion.php');
 $estado = 1;
 
 try {
-    $db = conexion("root", "K17OACX");
+    $db = conexion("root", "");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $db->prepare("INSERT INTO   
-    proveedor(id_proveedor, nombre_proveedor, nombre_comercial, rtn, telefono, fax, correo, web, descuento_credito, limite_credito, direccion, contacto, estado)
-    VALUES (:id_proveedor, :nombre_proveedor, :nombre_comercial, :rtn, :telefono, :fax, :correo, :web, :descuento_credito, :limite_credito, :direccion, :contacto, :estado)");
+    proveedor(id_proveedor, nombre_proveedor, nombre_comercial, rtn, telefono, fax, correo, web, descuento_credito, limite_credito, direccion, contacto, forma_pago, estado)
+    VALUES (:id_proveedor, :nombre_proveedor, :nombre_comercial, :rtn, :telefono, :fax, :correo, :web, :descuento_credito, :limite_credito, :direccion, :contacto, :forma_pago, :estado)");
     $stmt->bindParam(":id_proveedor", $_POST['id_proveedor']);
     $stmt->bindParam(":nombre_proveedor", $_POST['nombre_proveedor']);
     $stmt->bindParam(":nombre_comercial", $_POST["nombre_comercial"]);
@@ -22,6 +22,7 @@ try {
     $stmt->bindParam(":limite_credito", $_POST['limite_credito']);
     $stmt->bindParam(":direccion", $_POST['direccion']);
     $stmt->bindParam(":contacto", $_POST['contacto']);
+    $stmt->bindParam(":forma_pago", $_POST['forma_pago']);
     $stmt->bindParam(":estado", $estado);
     $stmt->execute();
     echo "Ok";

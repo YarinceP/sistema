@@ -1,6 +1,6 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/sistema/modelo/conexion.php');
-$db = conexion('root', 'K17OACX');
+$db = conexion('root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $db->prepare("SELECT *  FROM proveedor WHERE id_proveedor =" . $_GET['id']);
 $stmt->execute();
@@ -10,7 +10,7 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
 <div class="container-fluid">
     <ol class="breadcrumb">
         <li><a href="./">Inicio</a></li>
-        <li><a class="ajax-request" href="/proveedor/proveedor/proveedores.php">Proveedores</a></li>
+        <li><a class="ajax-request" href="/proveedor/proveedor/proveedor.php">Proveedores</a></li>
         <li><a class="active" href="#">Nuevo Proveedor</a></li>
     </ol>
 </div>
@@ -114,7 +114,7 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
 
                             <div class="col-sm-12">
                                 <br>
-                                <input type="submit" class="btn btn-primary pull-right" value="Crear Proveedor" disabled/>
+                                <input type="submit" class="btn btn-primary pull-right" value="Eliminar Proveedor" disabled/>
                             </div>
                         </form>
                     </div>

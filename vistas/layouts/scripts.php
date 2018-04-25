@@ -8,7 +8,7 @@
 <script src="./plugins/daterangepicker/daterangepicker.js"></script>
 <script src="./plugins/daterangepicker/moment.js"></script>
 <script src="./plugins/fullcalendar/fullcalendar.js"></script>
-<script src="./plugins/sweetalert-master/dist/sweetalert.min.js" type="text/javascript"></script>
 <script src="./plugins/pace/pace.min.js" type="text/javascript"></script>
 <script src="./plugins/iCheck/iCheck.min.js" type="text/javascript"></script>
 <script src="./js/funciones.js" type="text/javascript"></script>
+<script src="./js/sweetAlert2.js" type="text/javascript"></script>

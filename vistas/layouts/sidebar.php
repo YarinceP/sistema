@@ -18,6 +18,7 @@
           <li><a href="#">Sucursales</a></li>
         </ul>
       </li>
+
       <li class="treeview">
           <a href="#"><i class='fa fa-group'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
@@ -48,7 +49,7 @@
           <a href="#"><i class='fa fa-credit-card'></i> <span>Punto de Ventas</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
                 <li><a href="#">Cotizaciones</a></li>
-                <li><a href="#">Pedidos</a></li>
+                <li><a href="/pedidos/pedidos.php" class="ajax-request">Pedidos</a></li>
                 <li><a href="#">Facturas</a></li>
             </ul>
       </li>

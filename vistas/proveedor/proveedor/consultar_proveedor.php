@@ -1,6 +1,6 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/sistema/modelo/conexion.php');
-$db = conexion('root', 'K17OACX');
+$db = conexion('root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $db->prepare("SELECT *  FROM proveedor WHERE id_proveedor =" . $_GET['id']);
 $stmt->execute();
@@ -10,7 +10,7 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
 <div class="container-fluid">
     <ol class="breadcrumb">
         <li><a href="./">Inicio</a></li>
-        <li><a class="ajax-request" href="/proveedores/listado_proveedores.php">Proveedores</a></li>
+        <li><a class="ajax-request" href="/proveedor/proveedor/proveedor.php">Proveedores</a></li>
         <li><a class="active" href="#">Nuevo Proveedor</a></li>
     </ol>
 </div>
@@ -126,43 +126,3 @@ $fila= $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-<script>
-    $(formulario_crear_proveedor).ready(function () {
-        $('input[type="submit"]').removeAttr('disabled');
-    });
-    $(formulario_crear_proveedor).submit(function (event) {
-        event.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: './controlador/proveedor/crear_proveedor.php',
-            data: $("#formulario_crear_proveedor").serialize(),
-            dataType: 'html',
-            success: function (data) {
-                console.log(data);
-                if (data == "Ok") {
-                    swal({
-                        title: "<small>¡Informacion!</small>",
-                        text: " Registro creado correctamente ",
-                        icon: "success",
-                        html: true,
-                        confirmButtonText: "Cerrar"
-                    });
-                    $('input[type="submit"]').attr("disabled", "true");
-                } else {
-                    swal({
-                        title: "<small>¡Informacion!</small>",
-                        text: " Error ",
-                        html: true,
-                        confirmButtonText: "Cerrar",
-                    });
-                    $('input[type="submit"]').removeAttr('disabled');
-                }
-
-            },
-            error: function (data) {
-                $('input[type="submit"]').removeAttr('disabled');
-                console.log(data);
-            }
-        });
-    });
-</script>
