@@ -28,7 +28,7 @@
                                                 <label class='control-sidebar-subheading' for="fecha">Cliente</label>
                                                 <input class="form-control" id="nombrecliente" required="required"
                                                        data-action="listaclientes1" name="nombrecliente" type="text"
-                                                       >
+                                                >
                                             </div>
                                         </div>
                                         <div class="row">
@@ -55,7 +55,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                        <o></o>        <label class='control-sidebar-subheading' for="fecha">Forma Pago</label>
+                                                <o></o>
+                                                <label class='control-sidebar-subheading' for="fecha">Forma Pago</label>
                                                 <select class="form-control" required="required" id="formapago"
                                                         name="formapago">
                                                     <option value="1">Contado</option>
@@ -812,13 +813,12 @@
     </div>
 
 
-
     <div class="modal fade" id="buscarcliente" role="dialog" data-backdrop="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Listado de Terceros</h4>
                 </div>
                 <div class="modal-body">
@@ -851,7 +851,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Lista de productos</h4>
                 </div>
                 <div class="modal-body">
@@ -863,7 +863,6 @@
                             <th>Precio</th>
                             <th>ISV</th>
                             <th>Total</th>
-                            <th>Un</th>
                             <th>Opciones</th>
                         </tr>
                         </thead>
@@ -883,15 +882,71 @@
 
 
     <script>
-
-
+        var conteo = 1;
+    </script>
+    <script>
         $(document).on('keypress', function (e) {
             if (e.which == 13) {
                 e.preventDefault();
-                $("#buscarcliente").modal();
+                var tipo_transaccion = 1;
+                $.ajax({
+                    type: "POST",
+                    url: './vistas/pedidos/listado_terceros.php',
+                    dataType: 'json',
+                    data: {tipo_transaccion: tipo_transaccion},
+                    success: function (data) {
+                        if (conteo == 1) {
+                            $.each(data, function (name, value) {
+                                $("#listadodeterceros").append('<tr>' +
+                                    '<td>' + data[name].id_tercero + '</td>' +
+                                    '<td>' + data[name].nombre + '</td>' +
+                                    '<td>' + '<a class="btn btn-primary">' + 'SELECCIONAR' + '</a>' + '</td>' +
+                                    '</tr>');
+                            });
+                        }
+                        $('#listaclientes').DataTable();
+                        $("#buscarcliente").modal('show');
+                        conteo++;
+                    }
+                });
             }
         });
 
     </script>
+    <script>
+        $('body').on('click', '[data-action]', function () {
+           var accion = $(this).data('action');
+           if (accion == 'listaproducto') {
+               $.ajax({
+                  type: "POST",
+                  url: './controlador/buscar_producto.php',
+                   datatype: 'json',
+                   success: function (data) {
+                        console.log("hasta aqui funciona");
+                       $.each(data, function (name, value){
+                           $("#productos").append('<tr>' +
+                               '<td>' + data[name].codigo_pk + '</td>' +
+                               '<td>' + data[name].descripcion + '</td>' +
+                               '<td>' + data[name].precio + '</td>' +
+                               '<td>' + data[name].impuesto_fk + '</td>' +
+                               '<td>' + 'TOTAL' + '</td>' +
+                               '<td>' + '<a class="btn btn-primary">' + 'SELECCIONAR' + '</a>' + '</td>' +
+                               '</tr>');
+                       });
+                       $("#listaproductos").DataTable();
+                       $("#buscarproducto").modal('show');
+                   }
+               });
+            }
+        });
+    </script>
+
+    <tr>
+        <th>Codigo</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>ISV</th>
+        <th>Total</th>
+        <th>Opciones</th>
+    </tr>
 </section>
-</div>
