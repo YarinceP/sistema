@@ -23,6 +23,7 @@
           <a href="#"><i class='fa fa-group'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
                 <li><a href="/Clientes/Cliente/cliente.php" class="ajax-request">Clientes</a></li>
+                <li><a href="/inventario/vendedor/vendedor.php" class="ajax-request">Vendedor</a></li>
                 <li><a href="#">Recibos</a></li>
                 <li><a href="#">Reportes</a></li>
             </ul>
