@@ -3,6 +3,8 @@
 include "../../modelo/conexion.php";
 
 if ($_POST['tipo_transaccion'] == 1) {
+
+
     $tabla = "cliente";
 } else {
     $tabla = "proveedor";
